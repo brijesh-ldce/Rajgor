@@ -1,7 +1,10 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Heart, Briefcase, Building2, Award, ArrowRight, ShieldCheck, Users, Star } from "lucide-react";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useTranslations } from "next-intl";
 
 export default function LandingPage() {
+  const t = useTranslations();
   const modules = [
     {
       icon: Heart,
@@ -70,18 +73,19 @@ export default function LandingPage() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <LanguageSwitcher />
             <Link
               href="/login"
               className="text-sm font-semibold text-gray-700 border border-gray-200 px-4 py-2 rounded-lg hover:border-orange-400 hover:text-orange-600 transition-colors hidden sm:block"
             >
-              પ્રવેશ કરો
+              {t("Navigation.login")}
             </Link>
             <Link
               href="/register"
               className="text-sm font-bold text-white px-4 py-2 rounded-lg shadow-md hover:opacity-90 transition-opacity"
               style={{ background: "linear-gradient(135deg, #E8650A, #8B1C1C)" }}
             >
-              સભ્ય બનો
+              {t("Navigation.signup")}
             </Link>
           </div>
         </div>
@@ -105,8 +109,6 @@ export default function LandingPage() {
               </span>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-3" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>
-                આપણો સમાજ,
-                <br />
                 <span
                   style={{
                     WebkitBackgroundClip: "text",
@@ -116,13 +118,12 @@ export default function LandingPage() {
                     display: "inline-block",
                   }}
                 >
-                  એક મંચ.
+                  {t("Hero.title")}
                 </span>
               </h1>
-              <p className="text-sm text-gray-400 font-medium mb-4">Our Community, One Platform.</p>
 
               <p className="text-gray-500 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed mb-8" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>
-                <strong className="text-gray-800">રાજગોર બ્રાહ્મણ સમાજ</strong> માટે વિશ્વસનીય ડિજિટલ ઘર — વિવાહ, રોજગાર, વ્યાપાર, અને ગૌરવ માટે.
+                {t("Hero.subtitle")}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
@@ -131,14 +132,14 @@ export default function LandingPage() {
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white shadow-lg hover:opacity-90 transition-opacity"
                   style={{ background: "linear-gradient(135deg, #E8650A, #8B1C1C)", fontFamily: "'Noto Sans Gujarati', sans-serif" }}
                 >
-                  સમાજમાં જોડાઓ <ArrowRight className="w-4 h-4" />
+                  {t("Hero.joinUs")} <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/login"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-gray-700 bg-white border border-gray-200 shadow-sm hover:border-orange-400 hover:text-orange-600 transition-colors"
                   style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}
                 >
-                  સભ્ય? પ્રવેશ કરો
+                  {t("Navigation.login")}
                 </Link>
               </div>
 

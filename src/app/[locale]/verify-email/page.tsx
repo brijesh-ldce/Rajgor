@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { VerifyEmailClient } from "@/app/verify-email/verify-email-client";
+import { VerifyEmailClient } from "@/app/[locale]/verify-email/verify-email-client";
 
 function VerifyEmailFallback() {
   return (

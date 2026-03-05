@@ -1,0 +1,19 @@
+{
+    "Navigation": {
+        "home": "Home",
+        "matrimony": "Matrimony",
+        "rojgar": "Rojgar",
+        "vyapar": "Vyapar",
+        "garv": "Garv",
+        "directory": "Directory",
+        "login": "Log in",
+        "signup": "Sign up",
+        "dashboard": "Dashboard"
+    },
+    "Hero": {
+        "title": "Welcome to Rajgor Brahmin Samaj",
+        "subtitle": "Connecting our global community through shared values, traditions, and mutual support.",
+        "joinUs": "Join the Community",
+        "learnMore": "Learn More"
+    }
+}
