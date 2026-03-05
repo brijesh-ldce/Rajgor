@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
     "@prisma/client",
   ],
   transpilePackages: [".prisma"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '62823221dfff75d61e6a8dfc45ad4148.r2.cloudflarestorage.com',
+      },
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);

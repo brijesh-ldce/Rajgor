@@ -18,3 +18,12 @@ export async function generateUploadUrl(key: string, contentType: string) {
     });
     return getSignedUrl(R2, command, { expiresIn: 3600 });
 }
+export async function uploadFileToR2(buffer: Buffer, key: string, contentType: string) {
+    const command = new PutObjectCommand({
+        Bucket: process.env.R2_BUCKET_NAME || "",
+        Key: key,
+        ContentType: contentType,
+        Body: buffer,
+    });
+    return R2.send(command);
+}

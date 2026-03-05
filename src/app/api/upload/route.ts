@@ -1,17 +1,20 @@
 import { NextResponse } from "next/server";
-import { generateUploadUrl } from "@/lib/r2";
+import { generateUploadUrl, uploadFileToR2 } from "@/lib/r2";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
 export async function POST(req: Request) {
     try {
-        // For registration, we don't have a session yet, but for other uploads we might check
-        const body = await req.json();
-        const { filename, contentType, type } = body;
+        const formData = await req.formData();
+        const file = formData.get("file") as File | null;
+        const type = formData.get("type") as string | null;
 
-        if (!filename || !contentType) {
-            return NextResponse.json({ error: "Filename and content type are required" }, { status: 400 });
+        if (!file || !type) {
+            return NextResponse.json({ error: "File and type are required" }, { status: 400 });
         }
+
+        const filename = file.name;
+        const contentType = file.type;
 
         const ext = filename.split(".").pop();
         const uniqueId = crypto.randomUUID();
@@ -35,9 +38,12 @@ export async function POST(req: Request) {
             else key = `misc/${userId}/${uniqueId}.${ext}`;
         }
 
-        const url = await generateUploadUrl(key, contentType);
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
 
-        return NextResponse.json({ url, key, publicUrl: `${process.env.R2_PUBLIC_URL}/${key}` });
+        await uploadFileToR2(buffer, key, contentType);
+
+        return NextResponse.json({ key, publicUrl: `${process.env.R2_PUBLIC_URL}/${key}` });
     } catch (error: any) {
         console.error("[UPLOAD_ERROR]", error);
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });

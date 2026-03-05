@@ -57,20 +57,17 @@ export default function RegisterPage() {
     try {
       setIsLoading(true);
 
+      const uploadParams = new FormData();
+      uploadParams.append("file", aadharFile);
+      uploadParams.append("type", "aadhar");
+
       const presignedRes = await fetch("/api/upload", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ filename: aadharFile.name, contentType: aadharFile.type, type: "aadhar" })
+        body: uploadParams
       });
 
-      if (!presignedRes.ok) throw new Error("Could not get upload URL");
-      const { url, key } = await presignedRes.json();
-
-      await fetch(url, {
-        method: "PUT",
-        body: aadharFile,
-        headers: { "Content-Type": aadharFile.type }
-      });
+      if (!presignedRes.ok) throw new Error("Could not upload Aadhar file");
+      const { key } = await presignedRes.json();
 
       const registerRes = await fetch("/api/auth/register", {
         method: "POST",

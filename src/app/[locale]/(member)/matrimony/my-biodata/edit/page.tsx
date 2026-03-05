@@ -44,26 +44,34 @@ export default function EditBiodataPage() {
             // 1. Upload photos to R2
             const photoUrls = [];
             for (const photo of photos) {
+                const formData = new FormData();
+                formData.append("file", photo);
+                formData.append("type", "biodata_photo");
+
                 const pRes = await fetch("/api/upload", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ filename: photo.name, contentType: photo.type, type: "biodata_photo" })
+                    body: formData
                 });
-                const { url, publicUrl } = await pRes.json();
-                await fetch(url, { method: "PUT", body: photo, headers: { "Content-Type": photo.type } });
+
+                if (!pRes.ok) throw new Error("Could not upload photo");
+                const { publicUrl } = await pRes.json();
                 photoUrls.push(publicUrl);
             }
 
             // 2. Upload Kundli to R2
             let kundliUrl = null;
             if (kundli) {
+                const formData = new FormData();
+                formData.append("file", kundli);
+                formData.append("type", "biodata_pdf");
+
                 const kRes = await fetch("/api/upload", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ filename: kundli.name, contentType: kundli.type, type: "biodata_pdf" })
+                    body: formData
                 });
-                const { url, publicUrl } = await kRes.json();
-                await fetch(url, { method: "PUT", body: kundli, headers: { "Content-Type": kundli.type } });
+
+                if (!kRes.ok) throw new Error("Could not upload Kundli PDF");
+                const { publicUrl } = await kRes.json();
                 kundliUrl = publicUrl;
             }
 
