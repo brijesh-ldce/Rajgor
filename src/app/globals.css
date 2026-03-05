@@ -45,25 +45,25 @@
 }
 
 :root {
-  /* Base */
-  --background: #FFFFFF;
-  --foreground: #18181B; /* Gray 900 */
+  /* Base - Warm cream */
+  --background: #FDF8F0;
+  --foreground: #1A1A1A;
 
-  /* Primary - Purple 500 */
-  --primary: #7C3AED;
+  /* Primary - Deep Saffron */
+  --primary: #E8650A;
   --primary-foreground: #FFFFFF;
 
-  /* Secondary - Purple 100 */
-  --secondary: #F3E8FF;
-  --secondary-foreground: #5B21B6; /* Purple 700 */
+  /* Secondary - Maroon */
+  --secondary: #8B1C1C;
+  --secondary-foreground: #FFFFFF;
 
-  /* Accent - Orange 500 */
-  --accent: #F97316;
-  --accent-foreground: #FFFFFF;
+  /* Accent - Gold */
+  --accent: #D4A017;
+  --accent-foreground: #1A1A1A;
 
-  /* Muted - Gray 100 */
-  --muted: #F4F4F5;
-  --muted-foreground: #71717A; /* Gray 500 */
+  /* Muted */
+  --muted: #E5E7EB;
+  --muted-foreground: #6B7280;
 
   /* Destructive - Red 500 */
   --destructive: #EF4444;
@@ -71,17 +71,18 @@
 
   /* UI Elements */
   --card: #FFFFFF;
-  --card-foreground: #18181B;
+  --card-foreground: #1A1A1A;
   --popover: #FFFFFF;
-  --popover-foreground: #18181B;
-  --border: #E4E4E7; /* Gray 200 */
+  --popover-foreground: #1A1A1A;
+  --border: #E5E7EB; /* Gray 200 */
   --input: #E4E4E7;
-  --ring: #7C3AED; /* Purple 500 */
+  --ring: #E8650A; /* Deep Saffron */
   
   --radius: 0.5rem;
 
-  --font-sans: 'Poppins', 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Noto Sans', 'Inter', sans-serif;
+  --font-heading: 'Poppins', sans-serif;
+  --font-gujarati: 'Noto Sans Gujarati', sans-serif;
 }
 
 .dark {
@@ -90,29 +91,29 @@
   --foreground: #FAFAFA; /* Gray 50 */
 
   /* Primary */
-  --primary: #8B5CF6; /* Purple 500 slightly lighter for dark mode if needed, kept generic for now or adjusted */
+  --primary: #E8650A;
   --primary-foreground: #FFFFFF;
 
   /* Secondary */
-  --secondary: #2E1065; /* Purple 950 */
-  --secondary-foreground: #E9D5FF; /* Purple 200 */
+  --secondary: #8B1C1C;
+  --secondary-foreground: #FFFFFF;
 
   /* Accent */
-  --accent: #EA580C; /* Orange 600 */
-  --accent-foreground: #FFFFFF;
+  --accent: #D4A017;
+  --accent-foreground: #1A1A1A;
 
   /* Muted */
-  --muted: #27272A; /* Gray 800 */
-  --muted-foreground: #A1A1AA; /* Gray 400 */
+  --muted: #27272A;
+  --muted-foreground: #A1A1AA;
 
   /* UI Elements */
-  --card: #18181B; /* Gray 900 */
+  --card: #18181B;
   --card-foreground: #FAFAFA;
   --popover: #18181B;
   --popover-foreground: #FAFAFA;
-  --border: #27272A; /* Gray 800 */
+  --border: #27272A;
   --input: #27272A;
-  --ring: #8B5CF6;
+  --ring: #E8650A;
 }
 
 @layer base {

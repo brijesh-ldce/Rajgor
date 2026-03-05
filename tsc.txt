@@ -1,0 +1,71 @@
+.next/types/validator.ts(279,31): error TS2344: Type 'typeof import("C:/Users/janih/rajgor-brahmin/src/app/api/admin/users/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/admin/users/[id]">'.
+  Types of property 'PATCH' are incompatible.
+    Type '(req: Request, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ success: boolean; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+src/app/(member)/garv/page.tsx(125,81): error TS2367: This comparison appears to be unintentional because the types '"UDYOG_MITRA" | "ROZGAR_DOOT" | "SAMAJ_RATNA" | "VYAPAR_GURU"' and '"ROJGAR_DATA"' have no overlap.
+src/app/(member)/layout.tsx(19,23): error TS2339: Property 'isApproved' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.
+src/app/(member)/matrimony/[id]/page.tsx(26,58): error TS2339: Property 'role' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.
+src/app/(member)/profile/page.tsx(18,13): error TS2561: Object literal may only specify known properties, but 'biodatas' does not exist in type 'UserInclude<DefaultArgs>'. Did you mean to write 'biodata'?
+src/app/(member)/profile/page.tsx(43,105): error TS2322: Type '{ className: string; title: string; }' is not assignable to type 'IntrinsicAttributes & Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>'.
+  Property 'title' does not exist on type 'IntrinsicAttributes & Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>'.
+src/app/(member)/profile/page.tsx(81,79): error TS2339: Property 'biodatas' does not exist on type '{ id: string; name: string; email: string; password: string; role: Role; isApproved: boolean; isVerified: boolean; phone: string | null; profilePhoto: string | null; aadharUrl: string | null; ... 4 more ...; updatedAt: Date; }'.
+src/app/(member)/profile/page.tsx(85,79): error TS2339: Property 'businesses' does not exist on type '{ id: string; name: string; email: string; password: string; role: Role; isApproved: boolean; isVerified: boolean; phone: string | null; profilePhoto: string | null; aadharUrl: string | null; ... 4 more ...; updatedAt: Date; }'.
+src/app/(member)/profile/page.tsx(89,79): error TS2339: Property 'jobPostings' does not exist on type '{ id: string; name: string; email: string; password: string; role: Role; isApproved: boolean; isVerified: boolean; phone: string | null; profilePhoto: string | null; aadharUrl: string | null; ... 4 more ...; updatedAt: Date; }'.
+src/app/(member)/profile/page.tsx(102,35): error TS2339: Property 'prideBadges' does not exist on type '{ id: string; name: string; email: string; password: string; role: Role; isApproved: boolean; isVerified: boolean; phone: string | null; profilePhoto: string | null; aadharUrl: string | null; ... 4 more ...; updatedAt: Date; }'.
+src/app/(member)/profile/page.tsx(117,43): error TS2339: Property 'prideBadges' does not exist on type '{ id: string; name: string; email: string; password: string; role: Role; isApproved: boolean; isVerified: boolean; phone: string | null; profilePhoto: string | null; aadharUrl: string | null; ... 4 more ...; updatedAt: Date; }'.
+src/app/(member)/profile/page.tsx(117,59): error TS7006: Parameter 'badge' implicitly has an 'any' type.
+src/app/(member)/rojgar/[id]/page.tsx(21,50): error TS2339: Property 'role' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.
+src/app/(member)/vyapar/[id]/page.tsx(30,60): error TS2339: Property 'role' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.
+src/app/(member)/vyapar/list/page.tsx(21,9): error TS2322: Type 'string' is not assignable to type 'never'.
+src/app/(member)/vyapar/list/page.tsx(64,49): error TS2345: Argument of type '"businessName"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(69,49): error TS2345: Argument of type '"category"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(74,49): error TS2345: Argument of type '"established"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(79,52): error TS2345: Argument of type '"description"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(84,49): error TS2345: Argument of type '"location"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(89,49): error TS2345: Argument of type '"city"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(94,49): error TS2345: Argument of type '"state"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(99,49): error TS2345: Argument of type '"website"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(104,62): error TS2345: Argument of type '"contactEmail"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(109,49): error TS2345: Argument of type '"contactPhone"' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(135,70): error TS2345: Argument of type '`helpRequests.${number}.type`' is not assignable to parameter of type '"helpRequests"'.
+src/app/(member)/vyapar/list/page.tsx(147,72): error TS2345: Argument of type '`helpRequests.${number}.description`' is not assignable to parameter of type '"helpRequests"'.
+src/app/admin/content/client-page.tsx(40,76): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/app/admin/content/client-page.tsx(42,80): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/app/admin/content/client-page.tsx(44,68): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/app/admin/layout.tsx(10,40): error TS2339: Property 'role' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.
+src/app/api/admin/content/route.ts(9,44): error TS2339: Property 'role' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.
+src/app/api/admin/users/[id]/route.ts(10,44): error TS2339: Property 'role' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.
+src/app/api/auth/forgot-password/route.ts(11,10): error TS2305: Module '"@/lib/email"' has no exported member 'sendPasswordResetEmail'.
+src/app/api/auth/forgot-password/route.ts(39,18): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/app/api/auth/forgot-password/route.ts(44,18): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/app/api/auth/resend-verification/route.ts(11,10): error TS2305: Module '"@/lib/email"' has no exported member 'sendVerificationEmail'.
+src/app/api/auth/resend-verification/route.ts(39,14): error TS2551: Property 'emailVerified' does not exist on type '{ id: string; name: string; email: string; password: string; role: Role; isApproved: boolean; isVerified: boolean; phone: string | null; profilePhoto: string | null; aadharUrl: string | null; ... 4 more ...; updatedAt: Date; }'. Did you mean 'isVerified'?
+src/app/api/auth/resend-verification/route.ts(46,18): error TS2551: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'verificationToken'?
+src/app/api/auth/resend-verification/route.ts(51,18): error TS2551: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'verificationToken'?
+src/app/api/auth/reset-password/route.ts(26,38): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/app/api/auth/reset-password/route.ts(42,17): error TS2561: Object literal may only specify known properties, but 'passwordHash' does not exist in type '(Without<UserUpdateInput, UserUncheckedUpdateInput> & UserUncheckedUpdateInput) | (Without<...> & UserUpdateInput)'. Did you mean to write 'password'?
+src/app/api/auth/reset-password/route.ts(44,14): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/app/api/auth/verify-email/route.ts(17,42): error TS2551: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'verificationToken'?
+src/app/api/auth/verify-email/route.ts(31,15): error TS2561: Object literal may only specify known properties, but 'emailVerified' does not exist in type '(Without<UserUpdateInput, UserUncheckedUpdateInput> & UserUncheckedUpdateInput) | (Without<...> & UserUpdateInput)'. Did you mean to write 'isVerified'?
+src/app/api/auth/verify-email/route.ts(33,12): error TS2551: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'. Did you mean 'verificationToken'?
+src/app/api/matrimony/biodata/route.ts(101,27): error TS2322: Type '{ OR?: ({ gotra: { contains: string; mode: "insensitive"; }; } | { city: { contains: string; mode: string; }; })[] | undefined; isApproved: true; isActive: true; }' is not assignable to type 'BiodataWhereInput'.
+  Types of property 'OR' are incompatible.
+    Type '({ gotra: { contains: string; mode: "insensitive"; }; } | { city: { contains: string; mode: string; }; })[] | undefined' is not assignable to type 'BiodataWhereInput[] | undefined'.
+      Type '({ gotra: { contains: string; mode: "insensitive"; }; } | { city: { contains: string; mode: string; }; })[]' is not assignable to type 'BiodataWhereInput[]'.
+        Type '{ gotra: { contains: string; mode: "insensitive"; }; } | { city: { contains: string; mode: string; }; }' is not assignable to type 'BiodataWhereInput'.
+          Object literal may only specify known properties, and 'city' does not exist in type 'BiodataWhereInput'.
+src/lib/auth.ts(10,5): error TS2687: All declarations of 'user' must have identical modifiers.
+src/lib/auth.ts(10,5): error TS2717: Subsequent property declarations must have the same type.  Property 'user' must be of type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; } | undefined', but here has type '{ id: string; role: string; isApproved: boolean; isVerified: boolean; } & { name?: string | null | undefined; email?: string | null | undefined; image?: string | null | undefined; }'.
+src/lib/auth.ts(27,3): error TS2322: Type 'import("C:/Users/janih/rajgor-brahmin/node_modules/@auth/prisma-adapter/node_modules/@auth/core/adapters").Adapter' is not assignable to type 'import("C:/Users/janih/rajgor-brahmin/node_modules/next-auth/adapters").Adapter'.
+  Types of property 'getUser' are incompatible.
+    Type '((id: string) => import("C:/Users/janih/rajgor-brahmin/node_modules/@auth/prisma-adapter/node_modules/@auth/core/types").Awaitable<import("C:/Users/janih/rajgor-brahmin/node_modules/@auth/prisma-adapter/node_modules/@auth/core/adapters").AdapterUser | null>) | undefined' is not assignable to type '((id: string) => import("C:/Users/janih/rajgor-brahmin/node_modules/next-auth/core/types").Awaitable<import("C:/Users/janih/rajgor-brahmin/node_modules/next-auth/adapters").AdapterUser | null>) | undefined'.
+      Type '(id: string) => import("C:/Users/janih/rajgor-brahmin/node_modules/@auth/prisma-adapter/node_modules/@auth/core/types").Awaitable<import("C:/Users/janih/rajgor-brahmin/node_modules/@auth/prisma-adapter/node_modules/@auth/core/adapters").AdapterUser | null>' is not assignable to type '(id: string) => import("C:/Users/janih/rajgor-brahmin/node_modules/next-auth/core/types").Awaitable<import("C:/Users/janih/rajgor-brahmin/node_modules/next-auth/adapters").AdapterUser | null>'.
+        Type 'import("C:/Users/janih/rajgor-brahmin/node_modules/@auth/prisma-adapter/node_modules/@auth/core/types").Awaitable<import("C:/Users/janih/rajgor-brahmin/node_modules/@auth/prisma-adapter/node_modules/@auth/core/adapters").AdapterUser | null>' is not assignable to type 'import("C:/Users/janih/rajgor-brahmin/node_modules/next-auth/core/types").Awaitable<import("C:/Users/janih/rajgor-brahmin/node_modules/next-auth/adapters").AdapterUser | null>'.
+          Type 'AdapterUser' is not assignable to type 'Awaitable<AdapterUser | null>'.
+            Type 'AdapterUser' is missing the following properties from type 'AdapterUser': role, isApproved, isVerified
+src/lib/auth.ts(83,22): error TS2339: Property 'role' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.
+src/lib/auth.ts(84,22): error TS2339: Property 'isApproved' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.
+src/lib/auth.ts(85,22): error TS2339: Property 'isVerified' does not exist on type '{ id: string; name?: string | null | undefined; email?: string | null | undefined; }'.

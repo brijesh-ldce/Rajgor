@@ -1,324 +1,344 @@
-"use client"
+import Link from "next/link";
+import { Heart, Briefcase, Building2, Award, ArrowRight, ShieldCheck, Users, Star } from "lucide-react";
 
-import Link from "next/link"
-import { ArrowRight, Check, Play, Upload, Database, FileSpreadsheet, Lock, Zap } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Navbar } from "@/components/ui/navbar"
-import { Footer } from "@/components/ui/footer"
-import { Card } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
-import { motion } from "framer-motion"
-import { Hero3D } from "@/components/hero-3d"
-
-export default function Home() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  }
+export default function LandingPage() {
+  const modules = [
+    {
+      icon: Heart,
+      titleGuj: "વિવાહ",
+      titleEn: "Matrimony",
+      desc: "સમાજના વિશ્વાસુ પરિવારો સાથે આદર્શ જીવનસાથી શોધો.",
+      descEn: "Find your ideal life partner within trusted community families.",
+      cardColor: "bg-rose-50 border-rose-100",
+      iconBg: "bg-rose-100",
+      iconColor: "text-rose-600",
+    },
+    {
+      icon: Briefcase,
+      titleGuj: "રોજગાર",
+      titleEn: "Employment",
+      desc: "સમાજની અંદર વિશ્વાસઘાટ નોકરીઓ શોધો કે પ્રતિભાવાન કર્મચારી채용 કરો.",
+      descEn: "Find or offer trusted jobs within the Samaj community.",
+      cardColor: "bg-sky-50 border-sky-100",
+      iconBg: "bg-sky-100",
+      iconColor: "text-sky-600",
+    },
+    {
+      icon: Building2,
+      titleGuj: "વ્યાપાર",
+      titleEn: "Business",
+      desc: "સામૂહિક ધંધા ખોળો, પ્રમોટ કરો, અને એકબીજાને સહાય-ઓફર કરો.",
+      descEn: "Discover, promote, and support community businesses.",
+      cardColor: "bg-violet-50 border-violet-100",
+      iconBg: "bg-violet-100",
+      iconColor: "text-violet-600",
+    },
+    {
+      icon: Award,
+      titleGuj: "ગર્વ",
+      titleEn: "Community Pride",
+      desc: "સામૂહિક ઉત્કૃષ્ટ સભ્યો ઉજ્જ્વળ કરો, બૅજ જીતો, અને ટૉપ ૧૦ માં આવો.",
+      descEn: "Celebrate achievers, earn badges, climb the leaderboard.",
+      cardColor: "bg-amber-50 border-amber-100",
+      iconBg: "bg-amber-100",
+      iconColor: "text-amber-600",
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-background flex flex-col font-sans">
-      <Navbar />
+    <div className="min-h-screen font-sans" style={{ backgroundColor: "#FDF8F0" }}>
 
-      <main className="flex-grow">
-        {/* --- HERO SECTION --- */}
-        <section className="relative pt-20 pb-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-purple-50/50 to-white -z-20" />
-          <Hero3D />
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              className="text-center max-w-4xl mx-auto mb-16"
-              initial="hidden"
-              animate="visible"
-              variants={containerVariants}
+      {/* ── NAVBAR ── */}
+      <header className="sticky top-0 z-50 bg-white border-b border-orange-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2.5">
+            <div
+              className="w-9 h-9 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md"
+              style={{ background: "linear-gradient(135deg, #E8650A, #8B1C1C)" }}
             >
-              <motion.div variants={itemVariants} className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary/10 text-primary hover:bg-primary/20 mb-6">
-                Now available for Enterprise
-              </motion.div>
-              <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-6 font-display">
-                Transform Any Data, <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                  Instantly.
-                </span>
-              </motion.h1>
-              <motion.p variants={itemVariants} className="mt-4 text-xl text-gray-500 max-w-2xl mx-auto mb-10">
-                From messy spreadsheets to perfect databases. AI-powered data transformation for modern enterprises.
-              </motion.p>
-              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link href="/book-demo">
-                  <Button size="lg" variant="gradient" className="w-full sm:w-auto text-lg px-8 h-12">
-                    Book a Demo
-                  </Button>
-                </Link>
-                <Link href="/demo">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg px-8 h-12 gap-2">
-                    <Play className="w-4 h-4 ml-1 fill-current" /> Watch Demo
-                  </Button>
-                </Link>
-              </motion.div>
-            </motion.div>
+              RB
+            </div>
+            <div>
+              <p className="font-bold text-gray-900 text-sm leading-tight">રાજગોર બ્રાહ્મણ</p>
+              <p className="text-[10px] text-gray-400 leading-tight font-medium">Rajgor Brahmin Samaj</p>
+            </div>
+          </Link>
 
-            {/* Animation Placeholder / Visual */}
-            <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="relative mx-auto max-w-5xl rounded-2xl border bg-white/50 backdrop-blur-sm p-4 shadow-2xl ring-1 ring-gray-900/10"
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+            <a href="#modules" className="hover:text-orange-600 transition-colors">સેવાઓ</a>
+            <a href="#how" className="hover:text-orange-600 transition-colors">કઈ રીતે?</a>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="/login"
+              className="text-sm font-semibold text-gray-700 border border-gray-200 px-4 py-2 rounded-lg hover:border-orange-400 hover:text-orange-600 transition-colors hidden sm:block"
             >
-              <div className="aspect-[16/9] rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center overflow-hidden relative">
-                <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                  {/* Blob Animations via Tailwind (globals.css/tw-animate dependency) */}
-                  <div className="w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse absolute top-0 left-0"></div>
-                  <div className="w-96 h-96 bg-orange-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse absolute bottom-0 right-0"></div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center z-10 p-8 w-full max-w-4xl">
-                  {/* Step 1 */}
-                  <Card className="p-6 bg-white shadow-lg border-l-4 border-l-red-400 transform md:-rotate-3 hover:rotate-0 transition-transform duration-500">
-                    <div className="flex items-center gap-3 mb-3 text-red-600">
-                      <FileSpreadsheet className="w-6 h-6" />
-                      <span className="font-semibold text-sm">Messy Data.xlsx</span>
-                    </div>
-                    <div className="space-y-2 opacity-50">
-                      <div className="h-2 bg-gray-200 rounded w-full"></div>
-                      <div className="h-2 bg-gray-200 rounded w-3/4"></div>
-                      <div className="h-2 bg-gray-200 rounded w-5/6"></div>
-                    </div>
-                  </Card>
-
-                  <div className="flex justify-center text-primary">
-                    <ArrowRight className="w-8 h-8 animate-pulse" />
-                  </div>
-
-                  {/* Step 2 */}
-                  <Card className="p-6 bg-white shadow-lg border-l-4 border-l-green-500 transform md:rotate-3 hover:rotate-0 transition-transform duration-500">
-                    <div className="flex items-center gap-3 mb-3 text-green-600">
-                      <Database className="w-6 h-6" />
-                      <span className="font-semibold text-sm">Clean_DB.sql</span>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="h-2 bg-green-100 rounded w-full"></div>
-                      <div className="h-2 bg-green-100 rounded w-full"></div>
-                      <div className="h-2 bg-green-100 rounded w-3/4"></div>
-                    </div>
-                  </Card>
-                </div>
-              </div>
-            </motion.div>
+              પ્રવેશ કરો
+            </Link>
+            <Link
+              href="/register"
+              className="text-sm font-bold text-white px-4 py-2 rounded-lg shadow-md hover:opacity-90 transition-opacity"
+              style={{ background: "linear-gradient(135deg, #E8650A, #8B1C1C)" }}
+            >
+              સભ્ય બનો
+            </Link>
           </div>
-        </section>
+        </div>
+      </header>
 
-        {/* --- TRUSTED BY --- */}
-        <section className="py-12 border-y bg-gray-50/50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-center text-sm font-semibold text-gray-500 tracking-wide uppercase mb-8">
-              Trusted by 100+ innovative data teams
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-              {['Acme Corp', 'GlobalBank', 'TechStart', 'DataFlow', 'CloudScale'].map((company) => (
-                <div key={company} className="flex justify-center">
-                  <span className="text-xl font-bold text-gray-400">{company}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+      {/* ── HERO ── */}
+      <section className="relative overflow-hidden py-16 sm:py-24">
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 pointer-events-none" style={{ background: "radial-gradient(circle, #E8650A, transparent)", transform: "translate(40%,-40%)" }} />
+        <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full opacity-15 pointer-events-none" style={{ background: "radial-gradient(circle, #8B1C1C, transparent)", transform: "translate(-40%,40%)" }} />
 
-        {/* --- HOW IT WORKS --- */}
-        <section className="py-24 bg-white relative">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Three steps to perfect data
-              </h2>
-              <p className="mt-4 text-lg text-gray-500">
-                Stop writing custom scripts. Let Morphix handle the heavy lifting.
-              </p>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-              {/* Connecting Line (Desktop) */}
-              <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-gray-200 via-primary/30 to-gray-200 -z-10" />
-
-              {[
-                {
-                  icon: Upload,
-                  title: "1. Upload Your Data",
-                  desc: "Drag and drop any file: Excel, CSV, JSON, or connect via API. We handle files up to 5GB."
-                },
-                {
-                  icon: SparkleIcon,
-                  title: "2. AI Transforms It",
-                  desc: "Our AI auto-detects schemas, fixes errors, and maps columns to your target destination instantly."
-                },
-                {
-                  icon: Database,
-                  title: "3. Export & Sync",
-                  desc: "Download clean files or sync directly to Salesforce, HubSpot, Postgres, or your Data Warehouse."
-                }
-              ].map((step, i) => (
-                <div key={i} className="flex flex-col items-center text-center group">
-                  <div className="w-24 h-24 rounded-2xl bg-white border shadow-xl flex items-center justify-center mb-6 group-hover:-translate-y-2 transition-transform duration-300">
-                    <step.icon className={`w-10 h-10 ${i === 1 ? 'text-primary' : 'text-gray-600'}`} />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                  <p className="text-gray-500 leading-relaxed">{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* --- FEATURES --- */}
-        <section className="py-24 bg-gray-50 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-6">
-                  Everything you need to <br /> transform data at scale
-                </h2>
-                <div className="space-y-8">
-                  {[
-                    {
-                      title: "AI-Powered Schema Detection",
-                      desc: "Automatically understands messy headers and structures, mapping them to your standardized schema with 99% accuracy.",
-                      icon: Zap
-                    },
-                    {
-                      title: "Smart Validations & Enrichment",
-                      desc: "Validate emails, phones, and addresses. Enrich data with external APIs automatically during the pipeline.",
-                      icon: Check
-                    },
-                    {
-                      title: "Enterprise Grade Security",
-                      desc: "SOC2 Type II compliant. End-to-end encryption. Your data is deleted after processing.",
-                      icon: Lock
-                    }
-                  ].map((feat, i) => (
-                    <div key={i} className="flex gap-4">
-                      <div className="mt-1 flex-shrink-0">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                          <feat.icon className="h-6 w-6 text-primary" aria-hidden="true" />
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900">{feat.title}</h3>
-                        <p className="mt-2 text-gray-500">{feat.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Feature Visual */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="relative"
+            {/* Left Content */}
+            <div className="flex-1 text-center lg:text-left">
+              <span
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-full mb-6"
+                style={{ backgroundColor: "#FEE9D5", color: "#C2530B" }}
               >
-                <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-orange-500 rounded-2xl opacity-10 blur-2xl"></div>
-                <div className="relative rounded-2xl bg-white border shadow-2xl overflow-hidden">
-                  <div className="bg-gray-50 border-b px-4 py-3 flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                  </div>
-                  <div className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center text-sm font-medium text-gray-500 mb-2">
-                        <span>Confidence Score</span>
-                        <span className="text-green-600">98.5%</span>
-                      </div>
-                      {/* Mock Schema Map */}
-                      {[
-                        { src: "Cust Name", dest: "full_name", status: "Matched" },
-                        { src: "E-mail Addr", dest: "email_address", status: "Matched" },
-                        { src: "Ph #", dest: "phone_number", status: "Formatted" },
-                        { src: "Joined", dest: "created_at", status: "Converted" },
-                      ].map((row, k) => (
-                        <div key={k} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border">
-                          <span className="text-gray-700 font-mono text-sm">{row.src}</span>
-                          <ArrowRight className="w-4 h-4 text-gray-400" />
-                          <span className="text-purple-600 font-mono text-sm">{row.dest}</span>
-                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">{row.status}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+                🙏 &nbsp; ખાનગી પોર્ટલ · ચકાસાયેલ સભ્યો માટે
+              </span>
 
-        {/* --- STATS --- */}
-        <section className="bg-primary text-white py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-3" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>
+                આપણો સમાજ,
+                <br />
+                <span
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage: "linear-gradient(90deg, #E8650A, #8B1C1C)",
+                    display: "inline-block",
+                  }}
+                >
+                  એક મંચ.
+                </span>
+              </h1>
+              <p className="text-sm text-gray-400 font-medium mb-4">Our Community, One Platform.</p>
+
+              <p className="text-gray-500 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed mb-8" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>
+                <strong className="text-gray-800">રાજગોર બ્રાહ્મણ સમાજ</strong> માટે વિશ્વસનીય ડિજિટલ ઘર — વિવાહ, રોજગાર, વ્યાપાર, અને ગૌરવ માટે.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                <Link
+                  href="/register"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white shadow-lg hover:opacity-90 transition-opacity"
+                  style={{ background: "linear-gradient(135deg, #E8650A, #8B1C1C)", fontFamily: "'Noto Sans Gujarati', sans-serif" }}
+                >
+                  સમાજમાં જોડાઓ <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-gray-700 bg-white border border-gray-200 shadow-sm hover:border-orange-400 hover:text-orange-600 transition-colors"
+                  style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}
+                >
+                  સભ્ય? પ્રવેશ કરો
+                </Link>
+              </div>
+
+              {/* Trust badges */}
+              <div className="mt-8 flex flex-wrap gap-3 justify-center lg:justify-start">
+                {[
+                  { icon: ShieldCheck, text: "આધાર-ચકાસાયેલ", color: "text-green-600", bg: "bg-green-50" },
+                  { icon: Users, text: "Admin-Approved", color: "text-blue-600", bg: "bg-blue-50" },
+                  { icon: Star, text: "ગર્વ-ઈનામ", color: "text-amber-600", bg: "bg-amber-50" },
+                ].map((t) => (
+                  <span key={t.text} className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${t.bg} ${t.color}`}>
+                    <t.icon className="w-3.5 h-3.5" /> {t.text}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Right card grid */}
+            <div className="flex-shrink-0 w-full max-w-xs grid grid-cols-2 gap-4">
               {[
-                { val: "10M+", label: "Rows Processed" },
-                { val: "99.9%", label: "Accuracy Rate" },
-                { val: "50+", label: "File Formats" },
-                { val: "<10s", label: "Avg Transform Time" }
-              ].map((stat, i) => (
-                <div key={i}>
-                  <div className="text-4xl md:text-5xl font-bold mb-2">{stat.val}</div>
-                  <div className="text-purple-200 font-medium">{stat.label}</div>
+                { labelGuj: "વિવાહ", labelEn: "Matrimony", emoji: "💍", sub: "300+ profiles", bg: "bg-rose-50 border-rose-100" },
+                { labelGuj: "રોજગાર", labelEn: "Employment", emoji: "💼", sub: "50+ jobs", bg: "bg-sky-50 border-sky-100" },
+                { labelGuj: "વ્યાપાર", labelEn: "Business", emoji: "🏪", sub: "80+ listings", bg: "bg-violet-50 border-violet-100" },
+                { labelGuj: "ગર્વ", labelEn: "Pride", emoji: "🏆", sub: "Earn badges", bg: "bg-amber-50 border-amber-100" },
+              ].map((card) => (
+                <div
+                  key={card.labelGuj}
+                  className={`${card.bg} border rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300`}
+                >
+                  <div className="text-3xl mb-2">{card.emoji}</div>
+                  <p className="font-bold text-gray-900 text-sm" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>{card.labelGuj}</p>
+                  <p className="text-xs text-gray-400">{card.labelEn}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{card.sub}</p>
                 </div>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* --- CTA --- */}
-        <section className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-white -z-10"></div>
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold tracking-tight text-gray-900 mb-6 font-display">
-              Ready to transform your data?
+      {/* ── MODULES ── */}
+      <section id="modules" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>
+              સમાજના ચાર સ્તંભ
             </h2>
-            <p className="text-xl text-gray-500 mb-10">
-              Get a personalized demo for your use case and see why leading data teams trust Morphix.
+            <p className="text-sm text-gray-400 mt-1 font-medium">Four Pillars of the Samaj</p>
+            <p className="mt-3 text-gray-500 max-w-lg mx-auto text-sm">
+              આ ખાનગી, ચકાસાયેલ મંચ પર તમારા સમાજ માટે જરૂરી બધું — એક જ જગ્યાએ.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/book-demo">
-                <Button size="lg" variant="gradient" className="w-full sm:w-auto text-lg px-8 h-14 shadow-xl shadow-purple-200">
-                  Book a Demo
-                </Button>
-              </Link>
-              <Link href="/pricing">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg px-8 h-14">
-                  View Pricing
-                </Button>
-              </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {modules.map((mod) => (
+              <div
+                key={mod.titleGuj}
+                className={`${mod.cardColor} border rounded-2xl p-6 flex flex-col hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
+              >
+                <div className={`w-11 h-11 rounded-xl ${mod.iconBg} ${mod.iconColor} flex items-center justify-center mb-4`}>
+                  <mod.icon className="w-5 h-5" />
+                </div>
+                <h3 className="font-extrabold text-gray-900 text-xl leading-snug mb-0.5" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>{mod.titleGuj}</h3>
+                <p className="text-xs text-gray-400 font-medium mb-3">{mod.titleEn}</p>
+                <p className="text-sm text-gray-600 leading-relaxed flex-1" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>{mod.desc}</p>
+                <p className="text-xs text-gray-400 mt-1 italic">{mod.descEn}</p>
+                <Link
+                  href="/register"
+                  className="mt-5 inline-flex items-center gap-1 text-sm font-bold hover:gap-2 transition-all"
+                  style={{ color: "#E8650A", fontFamily: "'Noto Sans Gujarati', sans-serif" }}
+                >
+                  જોડાઓ <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── HOW IT WORKS ── */}
+      <section id="how" className="py-20" style={{ backgroundColor: "#FDF8F0" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>
+              કઈ રીતે જોડાવું?
+            </h2>
+            <p className="text-sm text-gray-400 mt-1 font-medium">How Does It Work?</p>
+          </div>
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="hidden md:block absolute top-10 left-[22%] right-[22%] h-0.5" style={{ background: "linear-gradient(to right, #f4cda8, #E8650A44, #f4cda8)" }} />
+            {[
+              { step: "01", titleGuj: "નોંધણી કરો", titleEn: "Register & Upload", desc: "આપની માહિતી ભરો અને ઓળખ-ચকાસણી માટે આધાર કાર્ડ અપલોડ કરો.", emoji: "📝" },
+              { step: "02", titleGuj: "Admin ચકાસશે", titleEn: "Admin Reviews", desc: "અમારી ટીમ ૨૪-૪૮ કલાકમાં તમારી અરજીની સમીક્ષા કરીને મંજૂરી આપશે.", emoji: "✅" },
+              { step: "03", titleGuj: "સંપૂર્ણ ઉપયોગ", titleEn: "Full Access", desc: "વિવાહ, રોજગાર, વ્યાપાર, અને ગર્વ — બધા મૉડ્યૂલ ઉપયોગ કરો.", emoji: "🎉" },
+            ].map((s) => (
+              <div key={s.step} className="flex flex-col items-center text-center">
+                <div className="w-20 h-20 rounded-2xl bg-white border border-orange-100 shadow-md flex items-center justify-center text-4xl mb-5 hover:-translate-y-2 transition-transform duration-300">
+                  {s.emoji}
+                </div>
+                <span className="text-xs font-bold tracking-widest mb-1" style={{ color: "#E8650A99" }}>STEP {s.step}</span>
+                <h3 className="text-base font-bold text-gray-900 mb-0.5" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>{s.titleGuj}</h3>
+                <p className="text-xs text-gray-400 font-medium mb-2">{s.titleEn}</p>
+                <p className="text-sm text-gray-500 leading-relaxed max-w-xs" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── VALUES ── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>
+              શા માટે જોડાવું?
+            </h2>
+            <p className="text-sm text-gray-400 mt-1 font-medium">Why Join Our Portal?</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { icon: ShieldCheck, titleGuj: "ચકાસાયેલ સભ્યો", titleEn: "Verified Members Only", descGuj: "દરેક સભ્ય Admin ટીમ દ્વારા આધાર-ઓળખ ચકાસ્યા પછી જ પ્રવેશ મળે.", },
+              { icon: Users, titleGuj: "સમાજ-પ્રથમ", titleEn: "Community First", descGuj: "ફક્ત રાજગોર બ્રાહ્મણ સમાજ માટે — ખાનગી, પ'ારિવારિક, ભરોસાપૂર્ણ." },
+              { icon: Star, titleGuj: "ગૌરવ-ઇનામ", titleEn: "Earn Garv Badges", descGuj: "મદદ કરો, નોકરી પોસ્ટ કરો, ધંધો નોંધો — ગર્વ-બૅજ જીતો." },
+            ].map((v) => (
+              <div key={v.titleGuj} className="flex gap-4 p-6 rounded-2xl border border-gray-100 bg-gray-50 hover:shadow-md transition-shadow">
+                <div className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center" style={{ backgroundColor: "#FEE9D5" }}>
+                  <v.icon className="w-5 h-5" style={{ color: "#E8650A" }} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-0.5 text-sm" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>{v.titleGuj}</h3>
+                  <p className="text-xs text-gray-400 mb-1 font-medium">{v.titleEn}</p>
+                  <p className="text-sm text-gray-500 leading-relaxed" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>{v.descGuj}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="py-20 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg, #E8650A 0%, #8B1C1C 100%)" }}>
+        <div className="absolute inset-0 pointer-events-none opacity-10">
+          <div className="absolute -top-20 -right-20 w-96 h-96 bg-white rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-10 w-64 h-64 bg-yellow-400 rounded-full blur-3xl" />
+        </div>
+        <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
+          <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "#FFD6B0" }}>
+            🙏 &nbsp; JOIN THE COMMUNITY
+          </p>
+          <h2 className="text-3xl sm:text-5xl font-extrabold mb-3 leading-tight" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>
+            આજે રાજગોર બ્રાહ્મણ
+            <br />
+            સમાજ સાથે જોડાઓ!
+          </h2>
+          <p className="text-sm font-medium mb-6" style={{ color: "#FFD6B0" }}>Join the Rajgor Brahmin Samaj Portal Today</p>
+          <p className="mb-10 text-base max-w-lg mx-auto leading-relaxed" style={{ color: "#FFD6B0", fontFamily: "'Noto Sans Gujarati', sans-serif" }}>
+            ચકાસાયેલ, વૃધ્ધિ-પામતા, અને સ્નેહ-ભર્યા સમુદાયનો ભાગ બનો. હમણાં જ નોંધાઓ.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/register"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white font-bold rounded-xl shadow-lg hover:bg-orange-50 transition-colors"
+              style={{ color: "#8B1C1C", fontFamily: "'Noto Sans Gujarati', sans-serif" }}
+            >
+              સભ્ય તરીકે નોંધાઓ <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/login"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-xl hover:bg-white/10 transition-colors"
+              style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}
+            >
+              આગળ સભ્ય છો? પ્રવેશ કરો
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="bg-gray-900 text-gray-400 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2.5">
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-xs"
+              style={{ background: "linear-gradient(135deg, #E8650A, #8B1C1C)" }}
+            >
+              RB
+            </div>
+            <div>
+              <span className="font-semibold text-white text-sm block" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>રાજગોર બ્રાહ્મણ સમાજ પોર્ટલ</span>
+              <span className="text-xs text-gray-500">Rajgor Brahmin Samaj Portal</span>
             </div>
           </div>
-        </section>
-
-      </main>
-
-      <Footer />
+          <p className="text-xs text-center">
+            © {new Date().getFullYear()} Rajgor Brahmin Samaj · A private, verified community portal.
+          </p>
+          <div className="flex gap-4 text-xs">
+            <Link href="/login" className="hover:text-white transition-colors" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>પ્રવેશ</Link>
+            <Link href="/register" className="hover:text-white transition-colors" style={{ fontFamily: "'Noto Sans Gujarati', sans-serif" }}>નોંધણી</Link>
+          </div>
+        </div>
+      </footer>
     </div>
-  )
-}
-
-function SparkleIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2">
-      <path d="M12 2L14.4 7.2L20 9L14.4 10.8L12 16L9.6 10.8L4 9L9.6 7.2L12 2Z" fill="currentColor" fillOpacity="0.2" />
-    </svg>
-  )
+  );
 }

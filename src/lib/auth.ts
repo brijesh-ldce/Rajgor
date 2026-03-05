@@ -1,30 +1,22 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import bcrypt from "bcryptjs";
-import type { NextAuthOptions } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+import type { NextAuthOptions, DefaultSession, DefaultUser } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import { prisma } from "@/lib/prisma";
 
-const googleClientId = process.env.GOOGLE_CLIENT_ID;
-const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
-if (!googleClientId || !googleClientSecret) {
-  console.warn(
-    "[auth] GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET is not configured. Google sign-in will be disabled."
-  );
-}
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma as any),
+  adapter: PrismaAdapter(prisma as any) as any,
   session: {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/signin",
+    signIn: "/login",
   },
   providers: [
-    Credentials({
+    CredentialsProvider({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
@@ -38,58 +30,52 @@ export const authOptions: NextAuthOptions = {
         const email = credentials.email.toLowerCase();
         const user = await prisma.user.findUnique({ where: { email } });
 
-        if (!user || !user.passwordHash) {
+        if (!user || !user.password) {
           throw new Error("Incorrect email or password.");
         }
 
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          user.passwordHash
-        );
+        const isValid = await bcrypt.compare(credentials.password, user.password);
 
         if (!isValid) {
           throw new Error("Incorrect email or password.");
-        }
-
-        if (!user.emailVerified) {
-          throw new Error("Please verify your email before signing in.");
         }
 
         return {
           id: user.id,
           email: user.email,
           name: user.name,
+          role: user.role,
+          isApproved: user.isApproved,
+          isVerified: user.isVerified,
         };
       },
     }),
-    ...(googleClientId && googleClientSecret
-      ? [
-          GoogleProvider({
-            clientId: googleClientId,
-            clientSecret: googleClientSecret,
-            allowDangerousEmailAccountLinking: true,
-          }),
-        ]
-      : []),
   ],
   callbacks: {
-    async session({ session, token }) {
-      if (session.user && token.sub) {
-        session.user.id = token.sub;
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        // @ts-ignore
+        token.role = user.role;
+        // @ts-ignore
+        token.isApproved = user.isApproved;
+        // @ts-ignore
+        token.isVerified = user.isVerified;
       }
-
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user && token) {
+        // @ts-ignore
+        session.user.id = token.id as string;
+        // @ts-ignore
+        session.user.role = token.role as any;
+        // @ts-ignore
+        session.user.isApproved = token.isApproved as boolean;
+        // @ts-ignore
+        session.user.isVerified = token.isVerified as boolean;
+      }
       return session;
     },
   },
-  events: {
-    async linkAccount({ user }) {
-      if (!user.emailVerified) {
-        await prisma.user.update({
-          where: { id: user.id },
-          data: { emailVerified: new Date() },
-        });
-      }
-    },
-  },
 };
-

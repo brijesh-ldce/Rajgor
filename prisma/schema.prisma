@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -12,74 +11,262 @@ datasource db {
 }
 
 model User {
-  id                   String                @id @default(cuid()) @map("_id")
-  name                 String?
-  email                String                @unique
-  passwordHash         String
-  emailVerified        DateTime?
-  createdAt            DateTime              @default(now())
-  updatedAt            DateTime              @updatedAt
-  accounts             Account[]
-  sessions             Session[]
-  verificationTokens   EmailVerificationToken[]
-  passwordResetTokens  PasswordResetToken[]
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String    @unique
+  phone          String?
+  password       String    // hashed
+  role           Role      @default(MEMBER)
+  isVerified     Boolean   @default(false)
+  isApproved     Boolean   @default(false)  // admin must approve new members
+  profilePhoto   String?   // R2 URL
+  aadharUrl      String?   // R2 URL for verification
+  village        String?   // their native village/town
+  city           String
+  state          String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // NextAuth relations
+  accounts       Account[]
+  sessions       Session[]
+
+  // Real relations
+  biodata        Biodata?
+  jobPostings    JobPosting[]
+  businessList   Business[]
+  helpOffers     HelpOffer[]
+  prideBadges    PrideBadge[]
 }
 
-model EmailVerificationToken {
-  id         String   @id @default(cuid()) @map("_id")
-  tokenHash  String   @unique
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  userId     String
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-}
-
-model PasswordResetToken {
-  id         String   @id @default(cuid()) @map("_id")
-  tokenHash  String   @unique
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  userId     String
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
+enum Role {
+  MEMBER
+  ADMIN
+  SUPER_ADMIN
 }
 
 model Account {
-  id                String  @id @default(cuid()) @map("_id")
-  userId            String
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?
-  access_token      String?
+  refresh_token     String? @db.String
+  access_token      String? @db.String
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?
+  id_token          String? @db.String
   session_state     String?
-  oauth_token_secret String?
-  oauth_token       String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           String   @id @default(cuid()) @map("_id")
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
-  userId       String
+  userId       String   @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
-  id         String   @id @default(cuid()) @map("_id")
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Biodata {
+  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String       @unique @db.ObjectId
+  user               User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Personal Info
+  gender             Gender
+  fullName           String
+  dateOfBirth        DateTime
+  birthTime          String?
+  birthPlace         String?
+  height             String       // e.g. "5'7\""
+  complexion         String?
+  bloodGroup         String?
+  disability         String?      // if any
+
+  // Education & Career
+  education          String
+  occupation         String
+  annualIncome       String?      // range e.g. "5-10 LPA"
+  workLocation       String?
+
+  // Family Info
+  fatherName         String
+  fatherOccupation   String?
+  motherName         String
+  motherOccupation   String?
+  siblings           String?      // e.g. "1 brother, 2 sisters"
+  familyType         FamilyType   // Joint / Nuclear
+  familyStatus       String?      // Middle class / Upper middle class
+
+  // Religious / Community
+  gotra              String       // important in Brahmin community
+  kuldevi            String?      // family deity
+  manglik            Boolean      @default(false)
+  horoscope          String?      // R2 URL for kundli PDF
+
+  // Partner Expectations
+  partnerAgeMin      Int?
+  partnerAgeMax      Int?
+  partnerHeightMin   String?
+  partnerEducation   String?
+  partnerOccupation  String?
+  partnerCity        String?
+
+  // Media
+  photos             String[]     // R2 URLs (max 5)
+  biodataPdf         String?      // R2 URL for uploaded PDF
+
+  // Status
+  isApproved         Boolean      @default(false)
+  isActive           Boolean      @default(true)
+  views              Int          @default(0)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum FamilyType {
+  JOINT
+  NUCLEAR
+}
+
+model JobPosting {
+  id               String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String      @db.ObjectId
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title            String
+  companyName      String?
+  description      String
+  jobType          JobType     // FULL_TIME, PART_TIME, CONTRACT, INTERNSHIP
+  workMode         WorkMode    // ONSITE, REMOTE, HYBRID
+  location         String
+  salaryMin        Int?
+  salaryMax        Int?
+  experienceMin    Int?        // years
+  experienceMax    Int?
+  skills           String[]
+  qualification    String?
+  contactEmail     String
+  contactPhone     String?
+  lastDateToApply  DateTime?
+  isApproved       Boolean     @default(false)
+  isActive         Boolean     @default(true)
+  views            Int         @default(0)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+  FREELANCE
+}
+
+enum WorkMode {
+  ONSITE
+  REMOTE
+  HYBRID
+}
+
+model Business {
+  id               String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String        @db.ObjectId
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  businessName     String
+  category         String        // e.g. "IT Services", "Restaurant", "Retail"
+  description      String
+  established      String?       // year
+  website          String?
+  location         String
+  city             String
+  state            String
+  contactEmail     String
+  contactPhone     String?
+  logo             String?       // R2 URL
+  photos           String[]      // R2 URLs (max 5)
+
+  // Help needed section
+  helpNeeded       HelpRequest[]
+
+  isApproved       Boolean       @default(false)
+  isActive         Boolean       @default(true)
+  views            Int           @default(0)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+model HelpRequest {
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  businessId     String      @db.ObjectId
+  business       Business    @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  helpType       HelpType    // INVESTOR, MENTOR, EMPLOYEE, SUPPLIER, CLIENT, OTHER
+  description    String
+  helpOffers     HelpOffer[]
+  isResolved     Boolean     @default(false)
+  createdAt      DateTime    @default(now())
+}
+
+enum HelpType {
+  INVESTOR
+  MENTOR
+  EMPLOYEE
+  SUPPLIER
+  CLIENT
+  PARTNER
+  OTHER
+}
+
+model HelpOffer {
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String      @db.ObjectId
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  helpRequestId  String      @db.ObjectId
+  helpRequest    HelpRequest @relation(fields: [helpRequestId], references: [id], onDelete: Cascade)
+
+  message        String      // "I can help you by providing..."
+  contactInfo    String?
+  likes          Int         @default(0)
+  isAccepted     Boolean     @default(false)
+  createdAt      DateTime    @default(now())
+}
+
+// Pride badges earned for helping
+model PrideBadge {
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String      @db.ObjectId
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badge          BadgeType
+  earnedFor      String      // description of why they earned it
+  awardedAt      DateTime    @default(now())
+}
+
+enum BadgeType {
+  SAMAJ_SEVAK       // Community Server (1st help offered)
+  UDYOG_MITRA       // Business Friend (helped 5 businesses)
+  ROZGAR_DOOT       // Employment Messenger (helped 10 get jobs)
+  SAMAJ_RATNA       // Community Jewel (top helper of the month)
+  VYAPAR_GURU       // Business Guru (mentored 3 businesses)
 }
