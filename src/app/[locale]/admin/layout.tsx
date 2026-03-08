@@ -1,14 +1,26 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/routing";
+import { getLocale } from "next-intl/server";
+import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { Users, LayoutDashboard, FileText, Settings, ArrowLeft } from "lucide-react";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
     const session = await getServerSession(authOptions);
+    const locale = await getLocale();
 
-    if (!session?.user || (session.user as any).role !== "ADMIN") {
-        redirect("/dashboard");
+    if (!session || !session.user) {
+        redirect({ href: "/login", locale });
+    }
+
+    const dbUser = await prisma.user.findUnique({
+        where: { id: session!.user!.id },
+        select: { role: true }
+    });
+
+    if (dbUser?.role !== "ADMIN") {
+        redirect({ href: "/dashboard", locale });
     }
 
     return (
@@ -51,9 +63,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                 <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shadow-sm z-10">
                     <div className="md:hidden font-heading font-bold text-lg">Admin Panel</div>
                     <div className="ml-auto flex items-center gap-4">
-                        <span className="text-sm font-medium text-gray-700">{session.user.name}</span>
+                        <span className="text-sm font-medium text-gray-700">{session?.user?.name}</span>
                         <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
-                            {session.user.name?.charAt(0)}
+                            {session?.user?.name?.charAt(0)}
                         </div>
                     </div>
                 </header>

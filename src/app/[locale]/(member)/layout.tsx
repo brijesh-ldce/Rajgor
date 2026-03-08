@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { redirect } from "@/i18n/routing";
+import { prisma } from "@/lib/prisma";
+import { getLocale } from "next-intl/server";
 import { MainNav } from "@/components/main-nav";
 import { UserNav } from "@/components/user-nav";
 
@@ -11,13 +13,19 @@ export default async function MemberLayout({
     children: React.ReactNode;
 }) {
     const session = await getServerSession(authOptions);
+    const locale = await getLocale();
 
-    if (!session?.user) {
-        redirect("/login");
+    if (!session || !session.user) {
+        redirect({ href: "/login", locale });
     }
 
-    if (!session?.user || !(session.user as any).isApproved) {
-        redirect("/pending-approval");
+    const dbUser = await prisma.user.findUnique({
+        where: { id: session!.user!.id },
+        select: { isApproved: true }
+    });
+
+    if (!dbUser?.isApproved) {
+        redirect({ href: "/pending-approval", locale });
     }
 
     return (
@@ -31,7 +39,7 @@ export default async function MemberLayout({
                     </Link>
                     <MainNav className="hidden md:flex flex-1" />
                     <div className="ml-auto flex items-center space-x-4">
-                        <UserNav user={session.user} />
+                        <UserNav user={session!.user} />
                     </div>
                 </div>
             </header>
