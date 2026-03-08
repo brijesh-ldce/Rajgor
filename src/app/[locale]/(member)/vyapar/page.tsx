@@ -7,12 +7,13 @@ import { Search, MapPin, Building2, Plus, Users } from "lucide-react";
 export default async function VyaparBrowsePage({
     searchParams,
 }: {
-    searchParams: { [key: string]: string | undefined };
+    searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
     const session = await getServerSession(authOptions);
 
-    const search = searchParams.search;
-    const category = searchParams.category;
+    const resolvedSearchParams = await searchParams;
+    const search = resolvedSearchParams.search;
+    const category = resolvedSearchParams.category;
 
     const whereClause: any = { isApproved: true, isActive: true };
 

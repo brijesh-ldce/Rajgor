@@ -55,25 +55,18 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        // @ts-ignore
         token.role = user.role;
-        // @ts-ignore
         token.isApproved = user.isApproved;
-        // @ts-ignore
         token.isVerified = user.isVerified;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user && token) {
-        // @ts-ignore
-        session.user.id = token.id as string;
-        // @ts-ignore
-        session.user.role = token.role as any;
-        // @ts-ignore
-        session.user.isApproved = token.isApproved as boolean;
-        // @ts-ignore
-        session.user.isVerified = token.isVerified as boolean;
+        session.user.id = token.id;
+        session.user.role = token.role;
+        session.user.isApproved = token.isApproved;
+        session.user.isVerified = token.isVerified;
       }
       return session;
     },

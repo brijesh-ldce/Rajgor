@@ -72,6 +72,38 @@ export async function sendApprovalEmail(toEmail: string, userName: string) {
   });
 }
 
+export async function sendVerificationEmail(toEmail: string, userName: string, token: string) {
+  const verifyUrl = `${getAppBaseUrl()}/verify-email?token=${token}`;
+  await sendEmail({
+    to: toEmail,
+    subject: "Verify your email - Rajgor Samaj",
+    html: `
+      <h2>Hello, ${userName}!</h2>
+      <p>Thank you for registering with the Rajgor Brahmin Samaj platform.</p>
+      <p>Please verify your email address by clicking the link below:</p>
+      <p><a href="${verifyUrl}">Verify Email Address</a></p>
+      <p>This link will expire in 24 hours.</p>
+      <p>If you did not create an account, please ignore this email.</p>
+    `,
+  });
+}
+
+export async function sendPasswordResetEmail(toEmail: string, userName: string, token: string) {
+  const resetUrl = `${getAppBaseUrl()}/reset-password?token=${token}`;
+  await sendEmail({
+    to: toEmail,
+    subject: "Reset your password - Rajgor Samaj",
+    html: `
+      <h2>Password Reset Request</h2>
+      <p>Hello ${userName},</p>
+      <p>We received a request to reset your password. Click the link below to set a new password:</p>
+      <p><a href="${resetUrl}">Reset Password</a></p>
+      <p>This link will expire in 1 hour.</p>
+      <p>If you did not request a password reset, please ignore this email.</p>
+    `,
+  });
+}
+
 export async function sendRejectionEmail(toEmail: string, userName: string, reason?: string) {
   await sendEmail({
     to: toEmail,

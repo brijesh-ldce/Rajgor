@@ -4,12 +4,13 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { ArrowLeft, Download, Eye, Heart, MapPin, Phone, Mail } from "lucide-react";
 
-export default async function BiodataDetailPage({ params }: { params: { id: string } }) {
+export default async function BiodataDetailPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user) return null;
 
     const biodata = await prisma.biodata.findUnique({
-        where: { id: params.id },
+        where: { id },
         include: {
             user: {
                 select: {
@@ -23,7 +24,7 @@ export default async function BiodataDetailPage({ params }: { params: { id: stri
         }
     });
 
-    if (!biodata || (!biodata.isApproved && (session.user as any).role !== "ADMIN" && biodata.userId !== session.user.id)) {
+    if (!biodata || (!biodata.isApproved && session.user.role !== "ADMIN" && biodata.userId !== session.user.id)) {
         return (
             <div className="container mx-auto py-20 text-center">
                 <h1 className="text-2xl font-bold">Biodata not found or pending approval.</h1>

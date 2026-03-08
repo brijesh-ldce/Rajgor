@@ -101,7 +101,7 @@ export default async function MemberDashboard() {
                             >
                                 <Users className="w-4 h-4" /> My Profile
                             </Link>
-                            {(session?.user as any)?.role === "ADMIN" && (
+                            {session?.user?.role === "ADMIN" && (
                                 <Link
                                     href="/admin"
                                     className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-secondary text-white font-semibold rounded-lg hover:bg-secondary/80 transition-colors shadow-md text-sm"

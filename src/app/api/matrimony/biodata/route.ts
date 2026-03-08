@@ -91,17 +91,20 @@ export async function GET(req: Request) {
         const search = url.searchParams.get("search") || "";
         // implement filtering in the DB query here as well based on search params
 
+        const whereClause: any = {
+            isApproved: true,
+            isActive: true,
+        };
+
+        if (search) {
+            whereClause.OR = [
+                { gotra: { contains: search, mode: "insensitive" } },
+                { user: { city: { contains: search, mode: "insensitive" } } }
+            ];
+        }
+
         const biodatas = await prisma.biodata.findMany({
-            where: {
-                isApproved: true,
-                isActive: true,
-                ...(search && {
-                    OR: [
-                        { gotra: { contains: search, mode: "insensitive" } },
-                        { user: { city: { contains: search, mode: 'insensitive' as const } } }
-                    ]
-                })
-            },
+            where: whereClause,
             include: {
                 user: {
                     select: { city: true, state: true }
