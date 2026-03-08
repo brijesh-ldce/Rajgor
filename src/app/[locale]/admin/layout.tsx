@@ -7,7 +7,7 @@ import { Users, LayoutDashboard, FileText, Settings, ArrowLeft } from "lucide-re
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
     const session = await getServerSession(authOptions);
 
-    if (!session?.user || (session.user as any).role !== "ADMIN") {
+    if (!session?.user || session.user.role !== "ADMIN") {
         redirect("/dashboard");
     }
 

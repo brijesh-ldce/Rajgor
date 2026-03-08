@@ -16,7 +16,7 @@ export default async function MemberLayout({
         redirect("/login");
     }
 
-    if (!session?.user || !(session.user as any).isApproved) {
+    if (!session?.user || !session.user.isApproved) {
         redirect("/pending-approval");
     }
 

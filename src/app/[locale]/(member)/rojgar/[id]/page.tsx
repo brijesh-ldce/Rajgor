@@ -5,12 +5,13 @@ import Link from "next/link";
 import { ArrowLeft, Building, MapPin, Briefcase, IndianRupee, Clock, Mail, Phone, CalendarDays } from "lucide-react";
 import { formatDistanceToNow, format } from "date-fns";
 
-export default async function JobDetailPage({ params }: { params: { id: string } }) {
+export default async function JobDetailPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user) return null;
 
     const job = await prisma.jobPosting.findUnique({
-        where: { id: params.id },
+        where: { id },
         include: {
             user: {
                 select: { name: true }
@@ -18,7 +19,7 @@ export default async function JobDetailPage({ params }: { params: { id: string }
         }
     });
 
-    if (!job || (!job.isApproved && (session.user as any).role !== "ADMIN" && job.userId !== session.user.id)) {
+    if (!job || (!job.isApproved && session.user.role !== "ADMIN" && job.userId !== session.user.id)) {
         return (
             <div className="container mx-auto py-20 text-center">
                 <h1 className="text-2xl font-bold">Job post not found or pending approval.</h1>

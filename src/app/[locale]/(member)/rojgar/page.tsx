@@ -8,11 +8,12 @@ import { Briefcase, MapPin, Building, Search, Plus } from "lucide-react";
 export default async function RojgarBrowsePage({
     searchParams,
 }: {
-    searchParams: { [key: string]: string | undefined };
+    searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
     const session = await getServerSession(authOptions);
 
-    const search = searchParams.search;
+    const resolvedSearchParams = await searchParams;
+    const search = resolvedSearchParams.search;
     const whereClause: any = { isApproved: true, isActive: true };
 
     if (search) {

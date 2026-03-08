@@ -6,11 +6,12 @@ import { prisma } from "@/lib/prisma";
 export default async function MatrimonyBrowsePage({
     searchParams,
 }: {
-    searchParams: { [key: string]: string | undefined };
+    searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
     const session = await getServerSession(authOptions);
 
-    const gender = searchParams.gender;
+    const resolvedSearchParams = await searchParams;
+    const gender = resolvedSearchParams.gender;
     const whereClause: any = { isApproved: true, isActive: true };
 
     if (gender) {
