@@ -37,6 +37,7 @@ model User {
   businessList   Business[]
   helpOffers     HelpOffer[]
   prideBadges    PrideBadge[]
+  familyMembers  FamilyMember[]
 }
 
 enum Role {
@@ -269,4 +270,19 @@ enum BadgeType {
   ROZGAR_DOOT       // Employment Messenger (helped 10 get jobs)
   SAMAJ_RATNA       // Community Jewel (top helper of the month)
   VYAPAR_GURU       // Business Guru (mentored 3 businesses)
+}
+
+model FamilyMember {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String   @db.ObjectId
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name            String
+  relation        String   // "Father", "Mother", "Spouse", "Son", "Daughter", "Brother", "Sister", "Other"
+  phone           String?
+  occupation      String?
+  maritalStatus   String?
+  dateOfBirth     DateTime?
+  
+  createdAt       DateTime @default(now())
 }

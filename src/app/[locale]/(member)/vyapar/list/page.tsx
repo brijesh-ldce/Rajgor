@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { toast } from "sonner";
 import Link from "next/link";
 import { ArrowLeft, Plus, Trash2 } from "lucide-react";

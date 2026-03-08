@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "prisma generate && node scripts/fix-prisma-default.js && next build",
     "start": "next start",
-    "postinstall": "prisma generate && node scripts/fix-prisma-default.js"
+    "postinstall": "prisma generate && node scripts/fix-prisma-default.js",
+    "seed:admin": "node prisma/seed-admin.js"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",

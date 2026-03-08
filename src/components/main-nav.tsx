@@ -11,6 +11,7 @@ export function MainNav({
     const pathname = usePathname();
 
     const navLinks = [
+        { href: "/directory", label: "Directory" },
         { href: "/matrimony", label: "Matrimony" },
         { href: "/rojgar", label: "Rojgar" },
         { href: "/vyapar", label: "Vyapar" },
