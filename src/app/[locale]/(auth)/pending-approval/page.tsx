@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { Clock } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { ResendButton } from "./resend-button";
 
-export default function PendingApprovalPage() {
+export default async function PendingApprovalPage() {
+    const session = await getServerSession(authOptions);
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full text-center space-y-8 bg-card p-10 rounded-xl shadow-lg border border-border">
@@ -11,7 +16,7 @@ export default function PendingApprovalPage() {
 
                 <div>
                     <h2 className="mt-6 text-3xl font-heading font-extrabold text-foreground">
-                        Account Pending Approval
+                        Account Pending
                     </h2>
                     <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
                         Thank you for registering with the Rajgor Brahmin Samaj platform! Your account has been created successfully.
@@ -24,10 +29,12 @@ export default function PendingApprovalPage() {
                     </p>
                 </div>
 
-                <div className="pt-6 border-t border-border">
+                <div className="pt-6 border-t border-border space-y-3 flex flex-col items-center">
+                    <ResendButton email={session?.user?.email} />
+
                     <Link
                         href="/"
-                        className="text-sm font-medium text-primary hover:text-orange-600 transition-colors"
+                        className="text-sm font-medium text-primary hover:text-orange-600 transition-colors mt-2"
                     >
                         ← Return to Homepage
                     </Link>
