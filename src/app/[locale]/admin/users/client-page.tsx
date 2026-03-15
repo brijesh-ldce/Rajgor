@@ -105,7 +105,7 @@ export default function AdminUsersClient({ initialUsers }: { initialUsers: any[]
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         {user.aadharUrl ? (
-                                            <a href={user.aadharUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800">
+                                            <a href={`/api/r2-url?key=${user.aadharUrl}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800">
                                                 <Eye className="w-4 h-4 mr-1" /> View Aadhar
                                             </a>
                                         ) : (

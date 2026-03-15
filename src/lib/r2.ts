@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const R2 = new S3Client({
@@ -26,4 +26,12 @@ export async function uploadFileToR2(buffer: Buffer, key: string, contentType: s
         Body: buffer,
     });
     return R2.send(command);
+}
+
+export async function getSignedReadUrl(key: string) {
+    const command = new GetObjectCommand({
+        Bucket: process.env.R2_BUCKET_NAME || "",
+        Key: key,
+    });
+    return getSignedUrl(R2, command, { expiresIn: 3600 }); // Valid for 1 hour
 }

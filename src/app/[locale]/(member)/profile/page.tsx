@@ -74,6 +74,26 @@ export default async function TopLevelProfilePage() {
                             </div>
 
                             <div className="bg-muted/30 rounded-xl p-5 border border-border/50">
+                                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4 border-b border-border/50 pb-2">Account Verification</h3>
+                                <div className="space-y-3 text-sm">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-muted-foreground">Status</span>
+                                        <span className={`px-2 py-1 text-xs font-semibold rounded-full ${user.isApproved ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                                            {user.isApproved ? 'Approved' : 'Pending Review'}
+                                        </span>
+                                    </div>
+                                    {user.aadharUrl && (
+                                        <div className="flex justify-between items-center pt-3 border-t border-border/30">
+                                            <span className="text-muted-foreground">ID Document</span>
+                                            <a href={`/api/r2-url?key=${user.aadharUrl}`} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-orange-600 font-medium inline-flex items-center">
+                                                <ShieldCheck className="w-4 h-4 mr-1" /> View Aadhar
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="bg-muted/30 rounded-xl p-5 border border-border/50">
                                 <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4 border-b border-border/50 pb-2">My Activity</h3>
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center text-sm">
